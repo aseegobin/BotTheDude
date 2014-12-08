@@ -4,8 +4,6 @@
 
 int main()
 {
-    int result1, result2; //variables to store our ADC result
-
     TRISA = 0xFF; //set all digital I/O to inputs
     TRISB = 0xFF;
     TRISC = 0xFF;
@@ -13,26 +11,9 @@ int main()
     ANSEL = 0x00; //disable all analog ports
     ANSELH = 0x00;
 
-    TRISAbits.TRISA0 = 1; //Disable the output driver for pin RA2/AN2
-    ANSELbits.ANS0 = 1; //set RA2/AN2 to analog mode
-
-    TRISAbits.TRISA1 = 1; //Disable the output driver for pin RA5/AN5
-    ANSELbits.ANS1 = 1; //set RA5/AN5 to analog mode
-
-    TRISCbits.TRISC0 = 0; //set RC0 as an output
-    TRISCbits.TRISC1 = 0;
-
-    ///////////////
-    // ADC0 Setup //
-    ///////////////
-
-    ADCON0bits.ADFM = 1; //ADC result is right justified
-    ADCON0bits.VCFG = 0; //Vdd is the +ve reference
-    ADCON1bits.ADCS = 0b001; //Fosc/8 is the conversion clock
-                            //This is selected because the conversion
-                            //clock period (Tad) must be greater than 1.5us.
-                            //With a Fosc of 4MHz, Fosc/8 results in a Tad
-                            //of 2us.
+    TRISCbits.TRISC3 = 0;
+    TRISCbits.TRISC6 = 0;
+    TRISCbits.TRISC7 = 0;
 
     ///////////////////////
     // Main Program Loop //
@@ -40,83 +21,21 @@ int main()
 
     while(1)
     {
-        __delay_us(5); //Wait the acquisition time (about 5us).
+       __delay_ms(5000);
+       PORTCbits.RC3 = 1;
+       PORTCbits.RC6 = 1;
+       PORTCbits.RC7 = 0;
+       __delay_ms(3000);
+       PORTCbits.RC3 = 1;
+       PORTCbits.RC6 = 0;
+       PORTCbits.RC7 = 1;
+       __delay_ms(5000);
+       PORTCbits.RC3 = 1;
+       PORTCbits.RC6 = 1;
+       PORTCbits.RC7 = 0;
+       __delay_ms(3000);
+       PORTCbits.RC3 = 0;
 
-        ADCON0bits.CHS = 0; //select analog input, AN2
-        ADCON0bits.ADON = 1; //Turn on the ADC
-
-        ADCON0bits.GO = 1; //start the conversion
-        while(ADCON0bits.GO==1){}; //wait for the conversion to end
-        result1 = (ADRESH<<8)+ADRESL; //combine the 10 bits of the conversion
-
-        ADCON0bits.ADON = 0; //Turn off the ADC
-
-        ADCON0bits.CHS = 1; //select analog input, AN5
-        ADCON0bits.ADON = 1; //Turn on the ADC
-
-        ADCON0bits.GO = 1; //start the conversion
-        while(ADCON0bits.GO==1){}; //wait for the conversion to end
-        result2 = (ADRESH<<8)+ADRESL; //combine the 10 bits of the conversion
-
-        ADCON0bits.ADON = 0; //Turn off the ADC
-
-        if(result1 > 200)
-        {
-            m0for();
-        }
-        else if (result1 < )
-        {
-            m0rev();
-        }
-        else
-        {
-            PORTCbits.RC0 = 0;
-        }
-
-        if(result2 > 20)
-        {
-            m1rev();
-        }
-        else if (result2 < 5)
-        {
-            m1for();
-        }
-        else
-        {
-            PORTCbits.RC1 = 0;
-        }
     }
     return 0;
-}
-
-int m0for()
-{
-    PORTCbits.RC0 = 1;
-    __delay_ms(1);
-    PORTCbits.RC0 = 0;
-    __delay_ms(19);
-}
-
-int m0rev()
-{
-    PORTCbits.RC0 = 1;
-    __delay_ms(10);
-    PORTCbits.RC0 = 0;
-    __delay_ms(10);
-}
-
-int m1for()
-{
-    PORTCbits.RC1 = 1;
-    __delay_ms(1);
-    PORTCbits.RC1 = 0;
-    __delay_ms(19);
-}
-
-int m1rev()
-{
-    PORTCbits.RC1 = 1;
-    __delay_ms(10);
-    PORTCbits.RC1 = 0;
-    __delay_ms(10);
 }
