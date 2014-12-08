@@ -34,14 +34,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S51 . . ]
 "1314
 [v _TRISCbits `VS51 ~T0 @X0 0 e@135 ]
-"1265
-[s S50 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S50 . . TRISB4 TRISB5 TRISB6 TRISB7 ]
-"1264
-[u S49 `S50 1 ]
-[n S49 . . ]
-"1273
-[v _TRISBbits `VS49 ~T0 @X0 0 e@134 ]
 "1053
 [s S40 :1 `uc 1 :1 `uc 1 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S40 . ADON GO_nDONE CHS VCFG ADFM ]
@@ -78,9 +70,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ADRESH `Vuc ~T0 @X0 0 e@30 ]
 "2540
 [v _ADRESL `Vuc ~T0 @X0 0 e@158 ]
-"53 main.c
+"52 main.c
 [v _m0for `(i ~T0 @X0 0 ef ]
-"57
+"56
 [v _m0rev `(i ~T0 @X0 0 ef ]
 "251 C:\Program Files\Microchip\xc8\v1.33\include\pic16f690.h
 [s S11 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -1479,50 +1471,47 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 17: ANSELbits.ANS2 = 1;
 "17
 [e = . . _ANSELbits 0 2 -> -> 1 `i `uc ]
-[; ;main.c: 19: TRISAbits.TRISA5 = 1;
+[; ;main.c: 19: TRISAbits.TRISA0 = 1;
 "19
-[e = . . _TRISAbits 0 5 -> -> 1 `i `uc ]
-[; ;main.c: 20: ANSELbits.ANS5 = 1;
+[e = . . _TRISAbits 0 0 -> -> 1 `i `uc ]
+[; ;main.c: 20: ANSELbits.ANS0 = 1;
 "20
-[e = . . _ANSELbits 0 5 -> -> 1 `i `uc ]
+[e = . . _ANSELbits 0 0 -> -> 1 `i `uc ]
 [; ;main.c: 22: TRISCbits.TRISC0 = 0;
 "22
 [e = . . _TRISCbits 0 0 -> -> 0 `i `uc ]
 [; ;main.c: 23: TRISCbits.TRISC1 = 0;
 "23
 [e = . . _TRISCbits 0 1 -> -> 0 `i `uc ]
-[; ;main.c: 24: TRISBbits.TRISB7 = 0;
-"24
-[e = . . _TRISBbits 0 4 -> -> 0 `i `uc ]
-[; ;main.c: 30: ADCON0bits.ADFM = 1;
-"30
+[; ;main.c: 29: ADCON0bits.ADFM = 1;
+"29
 [e = . . _ADCON0bits 0 4 -> -> 1 `i `uc ]
-[; ;main.c: 31: ADCON0bits.VCFG = 0;
-"31
+[; ;main.c: 30: ADCON0bits.VCFG = 0;
+"30
 [e = . . _ADCON0bits 0 3 -> -> 0 `i `uc ]
-[; ;main.c: 32: ADCON1bits.ADCS = 0b001;
-"32
+[; ;main.c: 31: ADCON1bits.ADCS = 0b001;
+"31
 [e = . . _ADCON1bits 0 1 -> -> 1 `i `uc ]
-[; ;main.c: 37: ADCON0bits.CHS = 2;
-"37
-[e = . . _ADCON0bits 0 2 -> -> 2 `i `uc ]
-[; ;main.c: 38: ADCON0bits.ADON = 1;
-"38
+[; ;main.c: 36: ADCON0bits.ADON = 1;
+"36
 [e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
-[; ;main.c: 44: while(1)
-"44
+[; ;main.c: 42: while(1)
+"42
 [e :U 134 ]
-[; ;main.c: 45: {
-"45
+[; ;main.c: 43: {
+"43
 {
-[; ;main.c: 46: _delay((unsigned long)((5)*(4000000/4000000.0)));
-"46
+[; ;main.c: 44: _delay((unsigned long)((5)*(4000000/4000000.0)));
+"44
 [e ( __delay (1 -> * -> -> 5 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
-[; ;main.c: 47: ADCON0bits.GO = 1;
-"47
+[; ;main.c: 45: ADCON0bits.CHS = 2;
+"45
+[e = . . _ADCON0bits 0 2 -> -> 2 `i `uc ]
+[; ;main.c: 46: ADCON0bits.GO = 1;
+"46
 [e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
-[; ;main.c: 48: while(ADCON0bits.GO==1){};
-"48
+[; ;main.c: 47: while(ADCON0bits.GO==1){};
+"47
 [e $U 136  ]
 [e :U 137 ]
 {
@@ -1530,110 +1519,110 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 136 ]
 [e $ == -> . . _ADCON0bits 1 1 `i -> 1 `i 137  ]
 [e :U 138 ]
-[; ;main.c: 49: result = (ADRESH<<8)+ADRESL;
-"49
-[e = _result + << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
-[; ;main.c: 51: if(result > 170)
-"51
+[; ;main.c: 48: result = (ADRESH<<8)|ADRESL;
+"48
+[e = _result | << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
+[; ;main.c: 50: if(result > 170)
+"50
 [e $ ! > _result -> 170 `i 139  ]
-[; ;main.c: 52: {
+[; ;main.c: 51: {
+"51
+{
+[; ;main.c: 52: m0for();
 "52
-{
-[; ;main.c: 53: m0for();
-"53
 [e ( _m0for ..  ]
-"54
+"53
 }
-[; ;main.c: 54: }
+[; ;main.c: 53: }
 [e $U 140  ]
-"55
+"54
 [e :U 139 ]
-[; ;main.c: 55: else if (result < 110)
+[; ;main.c: 54: else if (result < 110)
 [e $ ! < _result -> 110 `i 141  ]
-[; ;main.c: 56: {
+[; ;main.c: 55: {
+"55
+{
+[; ;main.c: 56: m0rev();
 "56
-{
-[; ;main.c: 57: m0rev();
-"57
 [e ( _m0rev ..  ]
-"58
+"57
 }
-[; ;main.c: 58: }
+[; ;main.c: 57: }
 [e $U 142  ]
-"59
+"58
 [e :U 141 ]
-[; ;main.c: 59: else
-[; ;main.c: 60: {
-"60
+[; ;main.c: 58: else
+[; ;main.c: 59: {
+"59
 {
-[; ;main.c: 61: PORTCbits.RC0 = 0;
-"61
+[; ;main.c: 60: PORTCbits.RC0 = 0;
+"60
 [e = . . _PORTCbits 0 0 -> -> 0 `i `uc ]
-"62
+"61
 }
 [e :U 142 ]
 [e :U 140 ]
-"63
+"62
 }
 [e :U 133 ]
-"44
+"42
 [e $U 134  ]
 [e :U 135 ]
+[; ;main.c: 61: }
 [; ;main.c: 62: }
-[; ;main.c: 63: }
-[; ;main.c: 64: return 0;
-"64
+[; ;main.c: 63: return 0;
+"63
 [e ) -> 0 `i ]
 [e $UE 132  ]
-[; ;main.c: 65: }
-"65
+[; ;main.c: 64: }
+"64
 [e :UE 132 ]
 }
-"67
+"66
 [v _m0for `(i ~T0 @X0 1 ef ]
-"68
+"67
 {
-[; ;main.c: 67: int m0for()
-[; ;main.c: 68: {
+[; ;main.c: 66: int m0for()
+[; ;main.c: 67: {
 [e :U _m0for ]
 [f ]
-[; ;main.c: 69: PORTCbits.RC0 = 1;
-"69
+[; ;main.c: 68: PORTCbits.RC0 = 1;
+"68
 [e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
-[; ;main.c: 70: _delay((unsigned long)((1)*(4000000/4000.0)));
-"70
+[; ;main.c: 69: _delay((unsigned long)((1)*(4000000/4000.0)));
+"69
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-[; ;main.c: 71: PORTCbits.RC0 = 0;
-"71
+[; ;main.c: 70: PORTCbits.RC0 = 0;
+"70
 [e = . . _PORTCbits 0 0 -> -> 0 `i `uc ]
-[; ;main.c: 72: _delay((unsigned long)((19)*(4000000/4000.0)));
-"72
+[; ;main.c: 71: _delay((unsigned long)((19)*(4000000/4000.0)));
+"71
 [e ( __delay (1 -> * -> -> 19 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-[; ;main.c: 73: }
-"73
+[; ;main.c: 72: }
+"72
 [e :UE 143 ]
 }
-"75
+"74
 [v _m0rev `(i ~T0 @X0 1 ef ]
-"76
+"75
 {
-[; ;main.c: 75: int m0rev()
-[; ;main.c: 76: {
+[; ;main.c: 74: int m0rev()
+[; ;main.c: 75: {
 [e :U _m0rev ]
 [f ]
-[; ;main.c: 77: PORTCbits.RC0 = 1;
-"77
+[; ;main.c: 76: PORTCbits.RC0 = 1;
+"76
 [e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
-[; ;main.c: 78: _delay((unsigned long)((10)*(4000000/4000.0)));
+[; ;main.c: 77: _delay((unsigned long)((10)*(4000000/4000.0)));
+"77
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;main.c: 78: PORTCbits.RC0 = 0;
 "78
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-[; ;main.c: 79: PORTCbits.RC0 = 0;
-"79
 [e = . . _PORTCbits 0 0 -> -> 0 `i `uc ]
-[; ;main.c: 80: _delay((unsigned long)((10)*(4000000/4000.0)));
-"80
+[; ;main.c: 79: _delay((unsigned long)((10)*(4000000/4000.0)));
+"79
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-[; ;main.c: 81: }
-"81
+[; ;main.c: 80: }
+"80
 [e :UE 144 ]
 }
