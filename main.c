@@ -16,12 +16,11 @@ int main()
     TRISAbits.TRISA2 = 1; //Disable the output driver for pin RA2/AN2
     ANSELbits.ANS2 = 1; //set RA2/AN2 to analog mode
    
-    TRISAbits.TRISA5 = 1; //Disable the output driver for pin RA5/AN5
-    ANSELbits.ANS5 = 1; //set RA5/AN5 to analog mode
+    TRISAbits.TRISA0 = 1; //Disable the output driver for pin RA0/AN0
+    ANSELbits.ANS0 = 1; //set RA0/AN0 to analog mode
 
     TRISCbits.TRISC0 = 0; //set RC0 as an output
-    TRISCbits.TRISC1 = 0;
-    TRISBbits.TRISB7 = 0;
+    TRISCbits.TRISC1 = 0; 
 
     ///////////////
     // ADC0 Setup //
@@ -34,7 +33,6 @@ int main()
                             //clock period (Tad) must be greater than 1.5us.
                             //With a Fosc of 4MHz, Fosc/8 results in a Tad
                             //of 2us.
-    ADCON0bits.CHS = 2; //select analog input, AN2
     ADCON0bits.ADON = 1; //Turn on the ADC
 
     ///////////////////////
@@ -44,9 +42,10 @@ int main()
     while(1)
     {
         __delay_us(5); //Wait the acquisition time (about 5us).
+        ADCON0bits.CHS = 2; //select analog input, AN2
         ADCON0bits.GO = 1; //start the conversion
         while(ADCON0bits.GO==1){}; //wait for the conversion to end
-        result = (ADRESH<<8)+ADRESL; //combine the 10 bits of the conversion
+        result = (ADRESH<<8)|ADRESL; //combine the 10 bits of the conversion
 
         if(result > 170)
         {
