@@ -1,0 +1,14 @@
+# Compiled files
+build/**
+dist/**
+
+#Object files
+*.obj
+
+#Makefiles
+nbproject/*.mk
+nbproject/*.properties
+nbproject/private/**
+
+#Misc
+Makefile
